@@ -39,6 +39,10 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 
+// Gsap
+// gsap.to(mesh.position, { transition: 1, delay: 1, x: 2 });
+// gsap.to(mesh.position, { transition: 1, delay: 2, x: -2 });
+
 // Animation
 const tick = () => {
   // Object
