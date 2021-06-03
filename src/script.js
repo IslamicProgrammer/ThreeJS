@@ -2,6 +2,19 @@ import './style.css';
 import * as THREE from 'three';
 
 /**
+ * Cursor
+ */
+const cursor = {
+  x: 0,
+  y: 0,
+};
+
+window.addEventListener('mousemove', (e) => {
+  cursor.x = e.clientX / sizes.width - 0.5;
+  cursor.y = -(e.clientY / sizes.height - 0.5);
+});
+
+/**
  * Base
  */
 // Canvas
@@ -17,13 +30,13 @@ const sizes = {
 const scene = new THREE.Scene();
 
 // AxesHelper
-const axesHelper = new THREE.AxisHelper(10);
-scene.add(axesHelper);
-
+// const axesHelper = new THREE.AxisHelper(100);
+// scene.add(axesHelper);
+ 
 // Object
 const mesh = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1, 5, 5, 5),
-  new THREE.MeshBasicMaterial({ color: 0xff0000 })
+  new THREE.MeshBasicMaterial({ color: 'brown' })
 );
 scene.add(mesh);
 
@@ -49,7 +62,7 @@ const camera = new THREE.PerspectiveCamera(
 
 // camera.position.x = 2;
 // camera.position.y = 2;
-camera.position.z = 2;
+camera.position.z = 3;
 camera.lookAt(mesh.position);
 scene.add(camera);
 
@@ -66,7 +79,14 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Update objects
-  mesh.rotation.y = elapsedTime;
+  //   mesh.rotation.y = elapsedTime;
+  //   mesh.rotation.z = elapsedTime;
+
+  // Update camera
+  camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3;
+  camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3;
+  camera.position.y = cursor.y * 3;
+  camera.lookAt(mesh.position);
 
   // Render
   renderer.render(scene, camera);
