@@ -12,10 +12,27 @@ const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
 
 // Object
-// const mesh = new THREE.Mesh(
-//   new THREE.BoxGeometry(1, 1, 1, 10, 10, 10),
-//   new THREE.MeshBasicMaterial({ color: 'coral', wireframe: true })
-// );
+// const geometry = new THREE.BoxBufferGeometry(1, 1, 1, 10, 10, 10),
+const geometry = new THREE.BufferGeometry();
+const count = 500;
+const positionArray = new Float32Array(count * 3 * 3);
+for (let i = 0; i < count * 3 * 3; i++) {
+  positionArray[i] = (Math.random() - 0.5) * 4;
+}
+const positionsAttribute = new THREE.BufferAttribute(positionArray, 3);
+geometry.setAttribute('position', positionsAttribute);
+
+// const postionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
+// const positionsAttribute = new THREE.BufferAttribute(postionsArray, 3);
+// geometry.setAttribute('position', positionsAttribute);
+
+const material = new THREE.MeshBasicMaterial({
+  color: 'coral',
+  wireframe: true,
+});
+const mesh = new THREE.Mesh(geometry, material);
+
+scene.add(mesh);
 
 // const geometry1 = new THREE.Geometry();
 // const vertex1 = new THREE.Vector3(0, 0, 0);
@@ -52,29 +69,29 @@ const scene = new THREE.Scene();
 // scene.add(mesh1);
 // scene.add(mesh2);
 // sad
-const geometry = new THREE.Geometry();
-const material = new THREE.MeshBasicMaterial({
-  color: 'coral',
-  wireframe: true,
-});
+// const geometry = new THREE.Geometry();
+// const material = new THREE.MeshBasicMaterial({
+//   color: 'coral',
+//   wireframe: true,
+// });
 
-for (let i = 0; i <= 50; i++) {
-  for (let j = 0; j <= 3; j++) {
-    geometry.vertices.push(
-      new THREE.Vector3(
-        (Math.random() - 0.5) * 4,
-        (Math.random() - 0.5) * 4,
-        (Math.random() - 0.5) * 4
-      )
-    );
-  }
-  const indexes = i * 3;
-  geometry.faces.push(new THREE.Face3(indexes + 0, indexes + 1, indexes + 2));
-}
+// for (let i = 0; i <= 50; i++) {
+//   for (let j = 0; j <= 3; j++) {
+//     geometry.vertices.push(
+//       new THREE.Vector3(
+//         (Math.random() - 0.5) * 4,
+//         (Math.random() - 0.5) * 4,
+//         (Math.random() - 0.5) * 4
+//       )
+//     );
+//   }
+//   const indexes = i * 3;
+//   geometry.faces.push(new THREE.Face3(indexes + 0, indexes + 1, indexes + 2));
+// }
 
-const mesh = new THREE.Mesh(geometry, material);
+// const mesh = new THREE.Mesh(geometry, material);
 
-scene.add(mesh);
+// scene.add(mesh);
 
 // Sizes
 const sizes = {
