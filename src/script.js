@@ -17,40 +17,64 @@ const scene = new THREE.Scene();
 //   new THREE.MeshBasicMaterial({ color: 'coral', wireframe: true })
 // );
 
-const geometry1 = new THREE.Geometry();
-const vertex1 = new THREE.Vector3(0, 0, 0);
-geometry1.vertices.push(vertex1);
-const vertex2 = new THREE.Vector3(0, 1, 0);
-geometry1.vertices.push(vertex2);
-const vertex3 = new THREE.Vector3(1, 0, 0);
-geometry1.vertices.push(vertex3);
-const face1 = new THREE.Face3(0, 1, 2);
-geometry1.faces.push(face1);
+// const geometry1 = new THREE.Geometry();
+// const vertex1 = new THREE.Vector3(0, 0, 0);
+// geometry1.vertices.push(vertex1);
+// const vertex2 = new THREE.Vector3(0, 1, 0);
+// geometry1.vertices.push(vertex2);
+// const vertex3 = new THREE.Vector3(1, 0, 0);
+// geometry1.vertices.push(vertex3);
+// const face1 = new THREE.Face3(0, 1, 2);
+// geometry1.faces.push(face1);
 
-const geometry2 = new THREE.Geometry();
-const vertex4 = new THREE.Vector3(0, 0, 1);
-geometry2.vertices.push(vertex4);
-const vertex5 = new THREE.Vector3(0, 1, 1);
-geometry2.vertices.push(vertex5);
-const vertex6 = new THREE.Vector3(1, 0, 1);
-geometry2.vertices.push(vertex6);
-const face2 = new THREE.Face3(0, 1, 2);
-geometry2.faces.push(face2);
+// const geometry2 = new THREE.Geometry();
+// const vertex4 = new THREE.Vector3(0, 0, 1);
+// geometry2.vertices.push(vertex4);
+// const vertex5 = new THREE.Vector3(0, 1, 1);
+// geometry2.vertices.push(vertex5);
+// const vertex6 = new THREE.Vector3(1, 0, 1);
+// geometry2.vertices.push(vertex6);
+// const face2 = new THREE.Face3(0, 1, 2);
+// geometry2.faces.push(face2);
 
-const material1 = new THREE.MeshBasicMaterial({
+// const material1 = new THREE.MeshBasicMaterial({
+//   color: 'coral',
+//   wireframe: true,
+// });
+
+// const material2 = new THREE.MeshBasicMaterial({
+//   color: 'yellow',
+//   wireframe: true,
+// });
+
+// const mesh1 = new THREE.Mesh(geometry1, material1);
+// const mesh2 = new THREE.Mesh(geometry2, material2);
+// scene.add(mesh1);
+// scene.add(mesh2);
+// sad
+const geometry = new THREE.Geometry();
+const material = new THREE.MeshBasicMaterial({
   color: 'coral',
   wireframe: true,
 });
 
-const material2 = new THREE.MeshBasicMaterial({
-  color: 'yellow',
-  wireframe: true,
-});
+for (let i = 0; i <= 50; i++) {
+  for (let j = 0; j <= 3; j++) {
+    geometry.vertices.push(
+      new THREE.Vector3(
+        (Math.random() - 0.5) * 4,
+        (Math.random() - 0.5) * 4,
+        (Math.random() - 0.5) * 4
+      )
+    );
+  }
+  const indexes = i * 3;
+  geometry.faces.push(new THREE.Face3(indexes + 0, indexes + 1, indexes + 2));
+}
 
-const mesh1 = new THREE.Mesh(geometry1, material1);
-const mesh2 = new THREE.Mesh(geometry2, material2);
-scene.add(mesh1);
-scene.add(mesh2);
+const mesh = new THREE.Mesh(geometry, material);
+
+scene.add(mesh);
 
 // Sizes
 const sizes = {
